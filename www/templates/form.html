@@ -1,0 +1,67 @@
+<ion-view title="Form" class="color-{{color}}">
+  <ion-content >
+    <form name="signinForm" class="padding" style="padding-top: 0px !important">
+      <div class="list list-inset">
+
+        <label class="item item-input item-floating-label">
+          <span class="input-label">Nombres y Apellidos</span>
+          <input name="name" type="text" placeholder="Nombres y Apellidos" required="required" ng-model="model.name">
+        </label>
+        <span class="tooltiptext" ng-show="showError">{{signinForm.name.$error.required?'Debe de ingresar un nombre!':''}}</span>
+
+        <label class="item item-input item-floating-label">
+          <span class="input-label">Correo</span>
+          <input name="email" type="email" placeholder="Correo" required="required" required="required" ng-model="model.email">
+        </label>
+        <span class="tooltiptext" ng-show="showError">{{signinForm.email.$error.required?'Debe de ingresar un correo!':''}} {{signinForm.email.$error.email?'Debe de ingresar un correo válido!':''}}</span>
+       <div class="item item-checkbox">
+         <label class="checkbox checkbox-dark">
+           <input type="checkbox" checked="checked" ng-model="model.liveColombia">
+         </label>
+         ¿Vive en Colombia?
+       </div>
+       <div class="item item-divider" ng-show="model.liveColombia">
+         Departamento:
+       </div>
+       <div class="item item-checkbox" ng-show="model.liveColombia">
+         <label class="checkbox checkbox-dark">
+           <input type="checkbox" ng-model="changeState">
+         </label>
+         {{jsonStates[model.state].name}}
+       </div>
+       <ion-list ng-show="!changeState&&model.liveColombia">
+         <ion-radio ng-repeat="index in jsonStates" ng-click="selectState(index.id)">{{index.name}}</ion-radio>
+       </ion-list>
+       <div class="item item-divider" ng-show="model.liveColombia">
+         Municipio:
+       </div>
+       <div class="item item-checkbox" ng-show="model.liveColombia">
+         <label class="checkbox checkbox-dark">
+           <input type="checkbox" ng-model="changeCity">
+         </label>
+         {{jsonCities[model.city].name}}
+       </div>
+       <ion-list ng-show="!changeCity&&model.liveColombia">
+         <ion-radio ng-repeat="index in jsonCities" ng-click="selectCity(index.id)">{{index.name}}</ion-radio>
+       </ion-list>
+       <div class="item item-divider">
+         Foto
+       </div>
+       <div class="item">
+         <button class="button button-full button-dark" ng-click="takePhoto()">
+         Tomar Una Foto
+         </button>
+         <button class="button button-full button-dark" ng-click="choosePhoto()">
+         Escoge Una Foto
+         </button>
+         <img ng-show="model.imgURI != ''" ng-src="{{model.imgURI}}" style="text-align: center">
+       </div>
+      </div>
+      <div class="">
+        <button class="button button-full button-dark icon-right ion-paper-airplane" ng-click="send(signinForm)">
+          Enviar
+        </button>
+      </div>
+  </form>
+  </ion-content>
+</ion-view>

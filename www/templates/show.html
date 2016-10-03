@@ -1,0 +1,14 @@
+<ion-view title="DATOS">
+  <ion-content >
+    <div class="list">
+      <a class="item item-thumbnail-left" href="#">
+        <img src="{{model.imgURI}}">
+        <h2>{{model.name}}</h2>
+        <p>{{model.email}}</p>
+        <p ng-show="model.liveColombia">
+          {{jsonStates[model.state].name}} - {{jsonCities[model.city].name}}
+        </p>
+      </a>
+    </div>
+  </ion-content>
+</ion-view>
